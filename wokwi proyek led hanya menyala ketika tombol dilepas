@@ -1,0 +1,47 @@
+#define led1 4
+#define led2 3
+#define led3 2
+#define tombol1 5
+#define statustombol1 digitalRead(tombol1)
+
+int pencet;
+bool gencet;
+
+void setup() {
+pinMode(led1, OUTPUT);
+pinMode(led2, OUTPUT);
+pinMode(led3, OUTPUT);
+pinMode(tombol1, INPUT_PULLUP);
+}
+
+void loop() {
+if(statustombol1 == 0 && gencet == 0) {
+  pencet++;
+  delay(200);
+  if(pencet>3) {
+  pencet = 0; }
+  gencet = 1;
+}
+if(statustombol1 == 1 && gencet == 1) {
+  gencet = 0;
+}
+if(pencet == 0 && statustombol1 == 1) {
+  digitalWrite(led1, 0);
+  digitalWrite(led2, 0);
+  digitalWrite(led3, 0);
+}
+if(pencet == 1 && statustombol1 == 1) {
+  digitalWrite(led1, 1);
+  digitalWrite(led2, 0);
+  digitalWrite(led3, 0);
+}
+if(pencet == 2 && statustombol1 == 1) {
+  digitalWrite(led1, 0);
+  digitalWrite(led2, 1);
+  digitalWrite(led3, 0);
+}
+if(pencet == 3 && statustombol1 == 1) {
+  digitalWrite(led1, 0);
+  digitalWrite(led2, 0);
+  digitalWrite(led3, 1);
+}}
