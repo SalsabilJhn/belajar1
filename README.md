@@ -1,8 +1,8 @@
 # ss proyek
 ss proyek 4 led menyala berurutan
 <img width="1360" height="768" alt="Screenshot (182)" src="https://github.com/user-attachments/assets/aff84fbf-62b2-4cfc-9bbb-581fe5450638" />
-https://wokwi.com/projects/426039494288845825
-#ss proyek led dengan urutan tombol
+https://wokwi.com/projects/426039494288845825  
+ss proyek led dengan urutan tombol
 <img width="1360" height="768" alt="Screenshot (183)" src="https://github.com/user-attachments/assets/476ae556-b6fc-4a84-8d27-4cd774c5c354" />
 ss proyek led hanya menyala ketika tombol dilepas
 <img width="1360" height="768" alt="Screenshot (187)" src="https://github.com/user-attachments/assets/d9d67b6a-f05c-4c23-b666-d705c16a7d04" />
