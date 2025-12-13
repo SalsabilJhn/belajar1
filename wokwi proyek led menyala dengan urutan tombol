@@ -1,0 +1,35 @@
+#define tombol1 4
+#define tombol2 3
+#define tombol3 2
+#define led1 5
+#define statustombol1 digitalRead(tombol1)
+#define statustombol2 digitalRead(tombol2)
+#define statustombol3 digitalRead(tombol3)
+
+int gaskan;
+
+void setup() {
+pinMode(led1, OUTPUT);
+pinMode(tombol1, INPUT_PULLUP);
+pinMode(tombol2, INPUT_PULLUP);
+pinMode(tombol3, INPUT_PULLUP);
+}
+
+void loop() {
+if(statustombol1 == 0 && gaskan == 0) {
+  digitalWrite(led1, 1);
+  gaskan = 1;
+}
+if(statustombol2 == 0 && gaskan == 1) {
+  digitalWrite(led1, 0);
+  gaskan = 2;
+}
+if(statustombol3 == 0 && gaskan == 2) {
+  digitalWrite(led1, 1);
+  gaskan = 3;
+}
+if(statustombol2 == 0 && gaskan == 3) {
+  digitalWrite(led1, 0);
+  gaskan = 0;
+}
+}
