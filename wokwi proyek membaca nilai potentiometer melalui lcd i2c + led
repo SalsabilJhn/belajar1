@@ -1,0 +1,129 @@
+#include <LCD_I2C.h>
+LCD_I2C lcd(0x27, 16, 2);
+#define tombol1 2
+#define tombol2 3
+#define tombol3 4
+#define tombol4 5
+#define statustombol0 digitalRead(tombol1)
+#define statustombol1 digitalRead(tombol2)
+#define statustombol2 digitalRead(tombol3)
+#define statustombol3 digitalRead(tombol4)
+#define led1 6
+#define led2 7
+int lembar, P1, P2;
+char buff[10];
+
+void setup() {
+ pinMode(tombol1, INPUT_PULLUP);
+ pinMode(tombol2, INPUT_PULLUP);
+ pinMode(tombol3, INPUT_PULLUP);
+ pinMode(tombol4, INPUT_PULLUP);
+ pinMode(led1, OUTPUT);
+ pinMode(led2, OUTPUT);
+ lcd.begin();
+ lcd.backlight(); 
+}
+
+void loop() {
+int nilaiAdc0 = map(analogRead(A0), 0, 1023, 0, 100);
+int nilaiAdc1 = map(analogRead(A1), 0, 1023, 0, 100);
+if(lembar == 0) {
+ lcd.setCursor(0, 0);
+ lcd.print("ADC 0: ");
+ sprintf(buff, "%3d", nilaiAdc0);
+ lcd.print(buff);
+ lcd.setCursor(0, 1);
+ lcd.print("ADC 1: ");
+ sprintf(buff, "%3d", nilaiAdc1);
+ lcd.print(buff);
+  if(statustombol0 == 0) {
+    lcd.clear();
+    lembar = 1;
+    delay(300);
+  } 
+  if(nilaiAdc0>P1) {
+    digitalWrite(led1, 1);
+  } else {
+    digitalWrite(led1, 0);
+  }
+  if(nilaiAdc1>P2) {
+    digitalWrite(led2, 1);
+  } else {
+    digitalWrite(led2, 0);
+  }   
+}
+if(lembar == 1){
+ lcd.setCursor(3, 0);
+ lcd.print("SET POINT");
+ lcd.setCursor(0, 1);
+ lcd.print(">");
+ lcd.setCursor(7, 1);
+ lcd.print("|");
+ lcd.setCursor(8, 1);
+ lcd.print(" ");
+ lcd.setCursor(1, 1);
+ sprintf(buff, "P1:%3d", P1);
+ lcd.print(buff);
+ 
+ lcd.setCursor(9, 1);
+ sprintf(buff, "P2:%3d", P2);
+ lcd.print(buff);
+  if(statustombol0 == 0) {
+    lcd.clear();
+    lembar = 0;
+    delay(300);
+}
+  if(statustombol3 == 0) {
+    lcd.clear();
+    lembar = 2;
+    delay(300);
+ }
+  if(statustombol1 == 0) {
+    P1++;
+    if(P1>100) P1 = 0;
+    delay(300);
+  }
+  if(statustombol2 == 0) {
+    P1--;
+    if(P1<0) P1 = 100;
+    delay(300);
+  }
+}
+if(lembar == 2){
+ lcd.setCursor(3, 0);
+ lcd.print("SET POINT");
+ lcd.setCursor(8, 1);
+ lcd.print(">");
+ lcd.setCursor(7, 1);
+ lcd.print("|");
+ lcd.setCursor(0, 1);
+ lcd.print(" ");
+ lcd.setCursor(9, 1);
+ sprintf(buff, "P2:%3d", P2);
+ lcd.print(buff);
+ 
+ lcd.setCursor(1, 1);
+ sprintf(buff, "P1:%3d", P1);
+ lcd.print(buff);
+  if(statustombol0 == 0) {
+    lcd.clear();
+    lembar = 0;
+    delay(300);
+}
+  if(statustombol1 == 0) {
+    P2++;
+    if(P2>100) P2 = 0;
+    delay(300);
+  }
+  if(statustombol2 == 0) {
+    P2--;
+    if(P2<0) P2 = 100;
+    delay(300);
+  }
+  if(statustombol3 == 0) {
+    lcd.clear();
+    lembar = 1;
+    delay(300);
+  }
+}
+}
